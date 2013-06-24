@@ -39,6 +39,7 @@ namespace MyNetstat
             // Resolve the hostname's DNS address
             IPAddress[] addresslist = Dns.GetHostAddresses(args[0]);
             string arg = addresslist[0].ToString();
+            int max = 0;
 
             while (true)
             {
@@ -54,8 +55,9 @@ namespace MyNetstat
                             i++;
                     }
                 }
+                max = Math.Max(i, max);
 
-                Console.WriteLine("Connection count to {0}, {1}", arg, i);
+                Console.WriteLine("Connection count to {0}, {1} at {2} (max = {3})", arg, i, DateTime.UtcNow, max);
                 Thread.Sleep(1000);
             }
         }
